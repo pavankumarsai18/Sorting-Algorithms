@@ -1,11 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
 #include <vector>
 #include <iostream>
 #include <cstdlib>
@@ -15,34 +7,44 @@ Write your code in this editor and press "Run" button to compile and execute it.
 using namespace std;
 
 
-
 void BucketSort(vector<double>&A)
 {
+    // Create a 2D vector called Buckets
     vector<vector<double>> Buckets;
     
+    // Initialize each element in Buckets to an empty vector
     for(int i = 0; i < A.size(); i++)
     {
         auto L = vector<double>();
         Buckets.push_back(L);
     }
     
-    for(auto d: A)
+    // We loop through the elements in the vector A
+    for(auto item: A)
     {
-        int hashIndex = static_cast<int>(A.size())*d;
-        Buckets[hashIndex].push_back(d);
+        // Find the hash value of the item
+        int hashIndex = static_cast<int>(A.size())*item;
+        // Store the item at the index hashValue
+        Buckets[hashIndex].push_back(item);
     }
     
-    for(auto b:Buckets)
+    // We loop through each bucket
+    for(auto bucket:Buckets)
     {
-        sort(b.begin(), b.end());
+        // We sort each bucket
+        sort(bucket.begin(), bucket.end());
     }
     
-    int ind = 0; 
-    for(auto b: Buckets)
+    // Initialize a variable called ind to store the index
+    int ind = 0;
+    
+    // We loop through each bucket
+    for(auto bucket: Buckets)
     {
-        for(auto num:b)
+        // loop thorugh the bucket and store the item in original vector A
+        for(auto item:bucket)
         {
-            A[ind] = num;
+            A[ind] = item;
             ind++;
         }
     }
@@ -54,27 +56,37 @@ void BucketSort(vector<double>&A)
 
 int main()
 {
+    // Seed the random number generator
     srand(time(0));
+  
+    // Create a variable that stores the size
     int size;
+  
+    // Take user input
     cout<<"The size ";
     cin>>size;
 
-    
-    vector<double> nums;
+    // Create a vector of double called numbers
+    vector<double> numbers;
+  
+    // Populate the vector
     for(int i = 0; i < size; i++)
     {
         double val = double(rand()*1.00/2147483647);
-        nums.push_back(val);
+        numbers.push_back(val);
     }
     
-    for(auto n: nums)
-        cout<<n<<" ";
+    // Print the items in numbers
+    for(auto number: numbers)
+        cout<<number<<" ";
     cout<<endl;
     
-    BucketSort(nums);
+    // Perform bucket Sort
+    BucketSort(numbers);
     
-    for(auto n: nums)
-        cout<<n<<" ";
+    // Print the contents in numbers
+    for(auto number: numbers)
+        cout<<number<<" ";
     cout<<endl;
     
     return 0;  
